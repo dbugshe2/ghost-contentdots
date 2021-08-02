@@ -1,0 +1,61 @@
+<!-- post card -->
+{{#is "featured_post"}}
+    {{#featured_post}}
+        fuck
+    {{/featured_post}}
+{{/is}}
+{{#post}}
+    <article
+        class="max-w-xs mx-auto my-8 overflow-hidden border border-gray-300 rounded-lg cursor-pointer place-self-center post-item"
+    >
+        <header>
+            {{#if featured_post.feature_image}}
+                <a href="{{featured_post.url}}">
+                    <img
+                        class="w-full max-h-40"
+                        src="{{featured_post.feature_image}}"
+                        alt="post thumbnail"
+                    />
+                </a>
+            {{/if}}
+            <div class="flex flex-row justify-between h-3.5 my-2 px-5">
+                <time
+                    class="font-medium text-black font-dmsans text-xxs"
+                    datetime="{{date format="YYYY-MM-DD"}}"
+                >
+                    {{date format="MMMM DD, YYYY"}}
+                </time>
+                <div class="flex flex-row">
+                    <a class="mx-0.5" href="#"><img
+                            src="{{asset "img/Bookmark.svg"}}"
+                            alt="bookmark"
+                        /></a>
+                    <a class="mx-0.5" href="#"><img
+                            src="{{asset "img/Share.svg"}}"
+                            alt="share"
+                        /></a>
+                </div>
+            </div>
+        </header>
+        <main class="px-5 my-5">
+            <a href="{{featured_post.url}}">
+                <h5 class="text-sm font-medium font-dmsans">
+                    {{featured_post.title}}
+                </h5>
+            </a>
+        </main>
+        <footer class="my-2">
+            <ul class="flex flex-row flex-wrap justify-evenly">
+                {{#foreach featured_post.tags}}
+                    <li
+                        class="inline-flex flex-row self-center my-1 text-left text-gray-500 align-middle text-xxs"
+                    >
+                        {{name}}<span class="text-black text-sm">
+                            &bull; &nbsp;</span>
+                    </li>
+                {{/foreach}}
+            </ul>
+        </footer>
+    </article>
+{{/post}}
+<!-- ./post card -->
