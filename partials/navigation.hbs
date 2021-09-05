@@ -1,16 +1,16 @@
 {{! replace ghost nav markup }}
 {{#if isSecondary}}
-    {{! <div class="flex flex-col mt-2 space-y-2 text-xs font-normal"> }}
+    <div class="secondary-nav">
     {{#foreach navigation}}
         <a href="{{url absolute="true"}}">{{label}}</a>
     {{/foreach}}
-    {{! </div> }}
+ </div>
 {{else}}
     <!-- <nav > -->
-    <ul class="invisible nav peer-checked:visible">
+    <ul>
         {{#foreach navigation}}
-            <li class="mx-2">
-                <a class="p-1 {{#if current}} nav-current{{/if}}" href="index.html">{{label}}</a>
+            <li class="mx-2 my-3">
+                <a class="p-1 {{#if current}} nav-current{{/if}}" href="{{url}}">{{label}}</a>
             </li>
         {{/foreach}}
     </ul>

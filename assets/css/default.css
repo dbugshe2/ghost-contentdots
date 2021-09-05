@@ -1,0 +1,182 @@
+/* body style */
+#bodyWrapper {
+    @apply flex flex-col min-h-full;
+}
+
+/* ./body styles */
+
+/* header styles */
+header#main-header {
+    @apply fixed flex flex-row items-center justify-around w-screen h-20 bg-white;
+    @apply md:flex md:flex-row md:fixed md:items-center md:w-screen md:h-20 md:bg-white md:justify-between md:px-9;
+}
+.default-logo-link {
+    @apply absolute z-50 mx-auto md:relative md:mx-0;
+}
+.default-logo-text {
+    @apply text-2xl font-extrabold text-center lowercase font-dmsans place-self-center;
+}
+#toggle-button span {
+    transition: all 0.2s ease-in-out;
+}
+#toggle-button span:before,
+#toggle-button span:after {
+    transition: all 0.2s ease-in-out;
+}
+/* /please work */
+#toggle-button:hover span,
+#toggle-button:hover span:before,
+#toggle-button:hover span:before {
+    background-color: #303030;
+}
+
+@keyframes bugfix {
+    from {
+        padding: 0;
+    }
+    to {
+        padding: 0;
+    }
+}
+#overlay-input {
+    @apply hidden;
+}
+#overlay-input:checked ~ #overlay-button:hover span,
+#overlay-input:checked ~ #overlay-button span {
+    background: transparent;
+}
+
+#overlay-input:checked ~ #overlay-button span:before {
+    transform: rotate(45deg) translate(7px, 8px);
+    opacity: 1;
+}
+
+#overlay-input:checked ~ #overlay-button span:after {
+    transform: rotate(-45deg) translate(7px, -8px);
+}
+
+#overlay-button {
+    @apply absolute z-50 cursor-pointer select-none md:hidden right-8 top-8;
+    padding: 26px 11px;
+}
+
+
+#burger-span,
+#burger-span:after,
+#burger-span:before {
+    height: 4px;
+    width: 28px;
+    transition: all 0.2s ease-in-out;
+    content: ""
+    @apply relative visible block bg-gray-900;
+}
+
+#burger-span:before {
+    top: -10px;
+}
+
+#burger-span:after {
+    top: 7px;
+}
+#main-header nav {
+    @apply fixed top-0 z-20 flex items-center justify-center w-screen h-screen text-sm font-normal text-center capitalize bg-white font-montserrat;
+    @apply md:visible md:relative md:h-auto md:pl-0 md:justify-end;
+}
+
+#main-header nav ul {
+    @apply  flex-col;
+    @apply md:inline-flex md:flex-row;
+}
+
+#main-header nav ul li {
+    @apply z-50 p-3 my-3 text-sm capitalize font-montserrat md:my-0;
+}
+
+#main-header .nav .nav-current {
+    @apply font-extrabold;
+}
+
+.nav-current {
+    @apply font-extrabold;
+}
+/* ./header styles */
+/* main content wrapper  */
+main#main-content {
+    @apply pt-20 lg:max-w-5xl lg:mx-auto;
+}
+/* ./main content wrapper */
+
+
+/* site footer */
+
+#mainFooter {
+    @apply justify-center px-16 py-5 text-white bg-black;
+    @apply sm:static sm:bottom-0 font-dmsans;
+}
+
+.default-footer-top {
+    @apply flex flex-col justify-between space-x-5 my-7;
+    @apply md:flex-row;
+}
+/* top footer left */
+
+.default-footer-inner-left {
+    @apply flex flex-col justify-center my-4;
+    @apply md:w-2/5;
+}
+
+.default-site-title {
+    @apply text-2xl;
+}
+/* top footer right */
+
+/* top footer middle */
+.default-footer-inner-middle {
+    @apply self-center justify-center my-4 md:w-2/5;
+}
+
+.default-newsletter-title {
+    @apply mb-5 text-sm font-bold lowercase;
+}
+.default-newsletter-form {
+    @apply inline-flex flex-row p-0 m-0;
+}
+.default-newsletter-input-wrapper {
+    @apply mb-3;
+}
+
+.default-newsletter-input {
+    @apply h-8 text-gray-900 outline-none w-72 rounded-l-md focus:ring-0;
+}
+
+.default-newsletter-submit {
+    @apply top-0 h-8 p-2 text-xs text-black outline-none cursor-pointer w-28 ring-0 font-montserrat rounded-r-md;
+    @apply hover:bg-gray-700 hover:text-white;
+}
+
+.default-newsletter-notice {
+    @apply mt-4 text-xxs;
+}
+/* ./top footer middle */
+
+/* top footer right */
+.default-footer-inner-right {
+    @apply self-center justify-center my-4;
+    @apply md:w-1/5;
+}
+
+.default-footer-inner-title {
+    @apply mb-3 text-base font-bold;
+}
+.default-footer-inner-title.default-site-title {
+    @apply mb-5 text-2xl font-bold;
+}
+.default-secondary-nav {
+    @apply flex flex-col mt-2 space-y-2 text-xs font-normal;
+}
+
+/* top footer right */
+
+.default-footer-divider {
+    @apply h-px bg-white my-7;
+}

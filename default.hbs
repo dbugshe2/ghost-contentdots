@@ -2,126 +2,148 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="HandheldFriendly" content="True" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{meta_title}}</title>
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="{{asset "/apple-touch-icon.png"}}"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="{{asset "favicon-32x32.png"}}"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="{{asset "favicon-16x16.png"}}"
-        />
-        <link rel="manifest" href="{{asset "site.webmanifest"}}" />
+        {{#if @site.icon}}
+            <link rel="icon" href="{{@site.icon}}" />
+        {{else}}
+            <link
+                rel="icon"
+                type="image/png"
+                sizes="16x16"
+                href="{{asset "favicon-16x16.png"}}"
+            />
+        {{/if}}
         <link
             rel="stylesheet"
             type="text/css"
-            href="{{asset "css/style.css"}}"
+            href="{{asset "built/css/style.css"}}"
         />
-        <style>
+        {{! <style>
             @import
             url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
             @import
             url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
-        </style>
+        </style> }}
         {{ghost_head}}
         {{! Outputs important meta data and settings, should always be in <head> }}
     </head>
-    <body class="{{body_class}}">
-        {{! {{> "header" }}
-       <header id="main-header">
-  <!-- logo -->
-  <a class="logo-link" href="index.html">
-    <!-- <img
-          src="./img/cropped-Logo-Background-1-227x27.png"
-          class="text-lg font-extrabold text-center lowercase place-self-center"
-        /> -->
-    <p class="logo-text">ContentDots</p>
-  </a>
-  <!-- mobile menu toggle -->
-  <input type="checkbox" id="overlay-input" class="peer" />
-  <label id="overlay-button" for="overlay-input" class="group">
-    <span
-      class="
-        burger-span
-        group-hover:bg-gray-700
-        group-hover:before:bg-gray-700
-        group-hover:after:bg-gray-700
-        peer-checked:group-hover:bg-transparent peer-checked:bg-transparent;
-      "
-    ></span>
-  </label>
-  <!-- ./mobile menu toggle -->
-{{navigation}}
-</header>
-
+    <body id="bodyWrapper" class="{{body_class}}">
+        <!-- site header -->
+        <header id="main-header">
+            {{#if @site.logo}}
+                <!-- logo -->
+                <a class="logo-link" href="{{@site.url}}">
+                    <img
+                        src="{{@site.logo}}"
+                        class="text-lg font-extrabold text-center lowercase place-self-center"
+                    />
+                </a>
+            {{else}}
+                {{! text logo }}
+                <a class="default-logo-link" href="{{@site.url}}">
+                    <p class="default-logo-text">Contentdots</p>
+                </a>
+            {{/if}}
+            <!-- mobile menu toggle -->
+            <input type="checkbox" id="overlay-input" class="peer" />
+            <label id="overlay-button" for="overlay-input" class="group">
+                <span
+                    id="burger-span"
+                    class="burger-span group-hover:bg-gray-700 group-hover:before:bg-gray-700 group-hover:after:bg-gray-700 peer-checked:group-hover:bg-transparent peer-checked:bg-transparent;"
+                ></span>
+            </label>
+            <!-- ./mobile menu toggle -->
+            <nav class="invisible peer-checked:visible">
+                {{navigation}}
+            </nav>
+        </header>
+        <!-- ./site header -->
         <main id="main-content">
             {{{body}}}
             {{! All content gets inserted here, index.hbs, post.hbs, etc }}
         </main>
-        {{! {{> "footer" }}
 
         <!-- site footer -->
-        <footer class="px-8 py-5 text-white bg-black font-dmsans">
-            <section class="my-4">
-                <h3 class="text-2xl">Contentdots</h3>
-                <div class="mt-2">
-                    <p class="w-2/3 text-xs">
-                        Contentdots is the world’s leading community for
-                        creatives to share, grow.
-                    </p>
-                </div>
-            </section>
-            <section class="my-4">
-                <h4 class="text-sm font-bold lowercase">Subscribe to Our
-                    Newsletter</h4>
-                <form class="p-0 m-0">
-                    <div class="mb-3">
-                        <input
-                            type="email"
-                            placeholder="email address"
-                            class="h-8 p-2 text-gray-900 outline-none font-input rounded-l-md focus:ring-0"
-                        />
-                        <input
-                            type="button"
-                            value="Submit"
-                            class="top-0 h-8 p-2 m-0 -mt-2 text-xs text-white outline-none font-montserrat rounded-r-md"
-                        />
+        <footer id="mainFooter">
+            <div class="default-footer-top">
+                <section class="default-footer-inner-left">
+                    <h3
+                        class="default-footer-inner-title default-site-title"
+                    >{{@site.title}}</h3>
+                    <div class="mt-2">
+                        <p class="w-2/3 text-xs">
+                            {{@site.description}}
+                        </p>
                     </div>
-                    <input
-                        type="checkbox"
-                        id="newsletterPolicy"
-                        class="w-2 h-2"
-                    />
-                    <label for="newsletterPolicy" class="ml-3 text-xxs">By
-                        Subscribing, you agree to our
-                        <a href="#">Privacy Policy</a></label>
-                </form>
-            </section>
-            <section class="my-4">
-                <h4 class="mb-3 text-base font-bold">Company</h4>
-                <div class="flex flex-col mt-2 space-y-2 text-xs font-normal">
+                </section>
+                <section class="default-footer-inner-middle">
+                    <h4 class="default-newsletter-title">Subscribe to Our
+                        Newsletter</h4>
+                    <form
+                        data-members-form="subscribe"
+                        class="default-newsletter-form"
+                    >
+                        <div class="default-newsletter-input-wrapper">
+                            <input
+                                data-members-label="true"
+                                type="hidden"
+                                value="Newsletter"
+                            />
+                            <input
+                                data-members-email="true"
+                                required="true"
+                                type="email"
+                                placeholder="email address"
+                                class="default-newsletter-input"
+                            />
+                            <input
+                                type="button"
+                                value="Submit"
+                                class="default-newsletter-submit"
+                            />
+                            <br />
+                        </div>
+                    </form>
+                </section>
+                <section class="default-footer-inner-right">
+                    <h4 class="default-footer-inner-title">My Links</h4>
+                    {{! <div
+                        class="flex flex-col self-end mt-2 space-y-2 text-xs font-normal"
+                    > }}
                     {{navigation type="secondary"}}
-                </div>
-            </section>
-            <div class="h-px bg-white"></div>
+                    {{! </div> }}
+                </section>
+            </div>
+            <div class="default-footer-divider"></div>
             <p class="font-montserrat text-xxs">
                 © 2021
                 {{@site.title}}. All rights reserved.
+                <a href="{{@site.url}}">{{@site.title}}</a>
+                &copy;
+                {{date format="YYYY"}}
             </p>
         </footer>
         <!-- ./site footer -->
         {{! <foot> }}
         {{ghost_foot}}
         {{! Outputs important scripts - should always be included before closing body tag }}
+
+        {{#is "post, page"}}
+            <script src="{{asset "built/js/jquery-3.4.1.min.js"}}"></script>
+            <script src="{{asset "built/js/jquery.fitvids.js"}}"></script>
+            <script>
+                var images = document.querySelectorAll('.kg-gallery-image img');
+                images.forEach(function (image) { var container =
+                image.closest('.kg-gallery-image'); var width =
+                image.attributes.width.value; var height =
+                image.attributes.height.value; var ratio = width / height;
+                container.style.flex = ratio + ' 1 0%'; });
+                $(document).ready(function () { var $postContent =
+                $("#main-content"); $postContent.fitVids(); });
+            </script>
+            <script src="{{asset "built/js/infinitescroll.js"}}"></script>
+        {{/is}}
     </body>
 </html>

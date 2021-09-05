@@ -1,126 +1,88 @@
 {{!< default}}
-<h1
-    class="mb-2 text-sm font-medium text-black font-dmsans md:font-medium md:text-3xl"
->
-    {{name}}
-</h1>
+{{#link href="/articles/"}}
+    <span class="p-5 text-sm font-normal text-black my-9 font-dmsans">
+        <img class="inline" src="{{asset "img/left.svg"}}" alt="left arrow" />
+        <img class="inline" src="{{asset "img/left.svg"}}" alt="left arrow" />
+        <span class="ml-4">Back to Articles</span>
+    </span>
+{{/link}}
+{{#tag}}
+    <header class="my-9">
+        <h1
+            class="mb-2 text-sm font-medium text-black font-dmsans md:font-medium md:text-3xl"
+        >{{name}}</h1>
+    </header>
+{{/tag}}
 <p>
     {{#if description}}
         {{description}}
     {{else}}
-        A collection of {{plural ../pagination.total empty='posts' singular='% post' plural='% posts'}}
+        A collection of
+        {{plural pagination.total empty='zero posts' singular='% post' plural='% posts'}}
     {{/if}}
 </p>
-{{#get "tags" limit="all" include="count.posts" order="count.post desc"}}
-    <header class="w-full">
-        <p
-            class="grid w-full grid-cols-12 gap-1 my-4 leading-9 font-dmsans text-xxs"
-        >
-            {{#foreach tags}}
-                <a
-                    href="{{url}}"
-                    class="col-span-4 py-3 text-gray-500 text-xxs"
-                >{{name}}({{count.posts}})
-                    <img
-                        src="{{asset "img/dot.svg"}}"
-                        class="mx-0.5 inline"
-                    /></a>
-            {{/foreach}}
-        </p>
-    </header>
-{{/get}}
 
-{{#get "post" limit="all" include="tags"}}
-    {{#foreach post}}
-        <article
-            class="max-w-xs mx-auto my-8 overflow-hidden border border-gray-300 rounded-lg cursor-pointer place-self-center post-item"
-        >
-            <header>
-                {{#if featured_post.feature_image}}
-                    <a href="{{featured_post.url}}">
-                        <img
-                            class="w-full max-h-40"
-                            src="{{featured_post.feature_image}}"
-                            alt="post thumbnail"
-                        />
-                    </a>
-                {{/if}}
-                <div class="flex flex-row justify-between h-3.5 my-2 px-5">
-                    <time
-                        class="font-medium text-black font-dmsans text-xxs"
-                        datetime="{{date format="YYYY-MM-DD"}}"
-                    >
-                        {{date format="MMMM DD, YYYY"}}
-                    </time>
-                    <div class="flex flex-row">
-                        <a class="mx-0.5" href="#"><img
-                                src="{{asset "img/Bookmark.svg"}}"
-                                alt="bookmark"
-                            /></a>
-                        <a class="mx-0.5" href="#"><img
-                                src="{{asset "img/Share.svg"}}"
-                                alt="share"
-                            /></a>
-                    </div>
-                </div>
-            </header>
-            <main class="px-5 my-5">
-                <a href="{{featured_post.url}}">
-                    <h5 class="text-sm font-medium font-dmsans">
-                        {{featured_post.title}}
-                    </h5>
-                </a>
-            </main>
-            <footer class="my-2">
-                <ul class="flex flex-row flex-wrap justify-evenly">
-                    {{#foreach featured_post.tags}}
-                        <li
-                            class="inline-flex flex-row self-center my-1 text-left text-gray-500 align-middle text-xxs"
-                        >
-                            {{name}}<span class="text-black text-sm">
-                                &bull; &nbsp;</span>
-                        </li>
-                    {{/foreach}}
-                </ul>
-            </footer>
-        </article>
-    {{/foreach}}
-    {{pagiantion}}
-{{/get}}
-<div class="gh-page">
-    <div class="gh-container">
-
-        {{#tag}}
-            <header class="gh-page-head">
-
-                <h1>{{name}}</h1>
-
-                <p>
-                    {{#if description}}
-                        {{description}}
-                    {{else}}
-                        {{!-- A collection of {{plural ../pagination.total empty='posts' singular='% post' plural='% posts'}} --}}
+<div class="grid grid-cols-12 gap-6">
+    {{! Loop through our posts collection }}
+    {{#foreach posts}}
+        <div class="col-span-12 sm:col-span-4 lg:col-span-3">
+            <article
+                class="home-featured-post"
+            >
+                <header>
+                    {{#if feature_image}}
+                        <a href="{{url}}">
+                            <img
+                                class="w-full max-h-40"
+                                src="{{feature_image}}"
+                                alt="post thumbnail"
+                            />
+                        </a>
+                        {{else}}
+                        <a href="{{url}}">
+                            <img
+                                class="w-full max-h-40"
+                                src="{{asset "img/default.png"}}"
+                                alt="post thumbnail"
+                            />
+                        </a>
                     {{/if}}
-                </p>
-
-                {{#if feature_image}}
-                    <img
-                        class="gh-page-image"
-                        src="{{feature_image}}"
-                        alt="{{name}}"
-                    />
-                {{/if}}
-
-            </header>
-        {{/tag}}
-
-        <div class="gh-postfeed">
-            {{#foreach posts}}
-
-                {{!-- {{> "postcard"}} partials/card.hbs --}}
-
-            {{/foreach}}
+                    <div class="flex flex-row justify-between h-3.5 my-2 px-5">
+                        <time
+                            class="font-medium text-black font-dmsans text-xxs"
+                            datetime="{{date format="YYYY-MM-DD"}}"
+                        >
+                            {{date format="MMMM DD, YYYY"}}
+                        </time>
+                        <div class="flex flex-row">
+                            <a class="mx-0.5" href="#"><img
+                                    src="{{asset "img/Share.svg"}}"
+                                    alt="share"
+                                /></a>
+                        </div>
+                    </div>
+                </header>
+                <main class="px-5 my-5">
+                    <a href="{{url}}">
+                        <h5 class="home-featured-title">
+                            {{title}}
+                        </h5>
+                    </a>
+                </main>
+                <footer class="my-2">
+                    <ul class="flex flex-row flex-wrap justify-evenly">
+                        {{#foreach tags}}
+                            <li
+                                class="inline-flex flex-row self-center my-1 text-left text-gray-500 align-middle text-xxs"
+                            >
+                                {{name}}<span class="text-sm text-black">
+                                    &bull; &nbsp;</span>
+                            </li>
+                        {{/foreach}}
+                    </ul>
+                </footer>
+            </article>
         </div>
-
-    </div>
+    {{/foreach}}
 </div>
+{{pagination}}

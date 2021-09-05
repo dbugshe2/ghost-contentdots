@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+    @font-face {
+      font-family: "Montserrat";
+      src: local("Montserrat"), url(../fonts/Montserrat-Regular.ttf) format("ttf"); }
+
+    @font-face {
+      font-family: "DM Sans";
+      src: local("DM Sans"), url(../fonts/DMSans-Regular.ttf) format("ttf"); }
+
+    @font-face {
+      font-family: "Mulish";
+      src: local("Mulish"), url(../fonts/Mulish-VariableFont_wght.ttf) format("ttf"); }
+
+}
